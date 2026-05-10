@@ -69,8 +69,8 @@ async def lifespan(app: FastAPI):
     global ml_model, scaler
     try:
         ml_model = joblib.load(MODEL_PATH)
-        scaler   = joblib.load(SCALER_PATH)
-        print("✅ Model and scaler loaded successfully.")
+        scaler   = joblib.load(SCALER_PATH)  # dict: {'amount': scaler, 'time': scaler}
+        print("Model and scaler loaded successfully.")
     except FileNotFoundError as e:
         print(f"⚠️  Artifact not found: {e}")
         print("   Run 02_model_training.ipynb to generate model.pkl and scaler.pkl first.")
@@ -128,10 +128,10 @@ def predict_fraud(transaction: TransactionData):
     # Convert Pydantic model → dict
     data = transaction.model_dump()
 
-    # Apply the same RobustScaler that was used during training
-    # Scaler was fitted separately on Amount and Time; we reuse it here.
-    scaled_amount = scaler.transform([[data["Amount"]]])[0][0]
-    scaled_time   = scaler.transform([[data["Time"]]])[0][0]
+    # Apply the same RobustScalers that were used during training.
+    # scaler is a dict with two separately-fitted scalers.
+    scaled_amount = scaler['amount'].transform([[data["Amount"]]])[0][0]
+    scaled_time   = scaler['time'].transform([[data["Time"]]])[0][0]
 
     # Build feature DataFrame in the exact column order used during training:
     # [scaled_amount, scaled_time, V1 … V28]
