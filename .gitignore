@@ -19,3 +19,6 @@ data/processed/*.csv
 # MLflow tracking artifacts
 mlruns/
 mlartifacts/
+
+# Exported model binaries (generated — not committed)
+models/*.pkl
