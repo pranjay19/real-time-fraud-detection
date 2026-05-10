@@ -85,7 +85,8 @@ st.markdown(
 )
 
 # ─── Day 13: Sidebar — All 30 Feature Inputs ────────────────────────────────
-API_URL = "http://127.0.0.1:8000/predict"
+#API_URL = "http://127.0.0.1:8000/predict"
+API_URL = "https://real-time-fraud-detection-9vl8.onrender.com/predict"  # <--- Deployed URL
 
 with st.sidebar:
     st.markdown("## ⚙️ Transaction Features")

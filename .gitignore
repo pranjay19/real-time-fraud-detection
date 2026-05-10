@@ -20,5 +20,5 @@ data/processed/*.csv
 mlruns/
 mlartifacts/
 
-# Exported model binaries (generated — not committed)
-models/*.pkl
+# Exported model binaries — committed so Render can load them
+# models/*.pkl

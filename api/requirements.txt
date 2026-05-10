@@ -1,0 +1,8 @@
+# API-specific dependencies for Render deployment
+fastapi
+uvicorn[standard]
+joblib
+pandas
+numpy
+scikit-learn
+pydantic
