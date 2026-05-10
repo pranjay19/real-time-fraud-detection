@@ -84,9 +84,14 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ─── Day 13: Sidebar — All 30 Feature Inputs ────────────────────────────────
-#API_URL = "http://127.0.0.1:8000/predict"
-API_URL = "https://real-time-fraud-detection-9vl8.onrender.com/predict"  # <--- Deployed URL
+import os
+
+# Day 17: Read API_URL from env var to support Docker cross-container networking.
+# Falls back to the deployed Render URL when running on Streamlit Cloud.
+API_URL = os.getenv(
+    "API_URL",
+    "https://real-time-fraud-detection-9vl8.onrender.com/predict"
+)
 
 with st.sidebar:
     st.markdown("## ⚙️ Transaction Features")

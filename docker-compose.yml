@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  fastapi-backend:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the models folder so the API can access model.pkl and scaler.pkl
+      - ./models:/models
+    networks:
+      - fraud-net
+
+  streamlit-frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8501:8501"
+    environment:
+      # Override API_URL so Streamlit talks to the backend via the Docker network
+      - API_URL=http://fastapi-backend:8000/predict
+    depends_on:
+      - fastapi-backend
+    networks:
+      - fraud-net
+
+networks:
+  fraud-net:
+    driver: bridge
