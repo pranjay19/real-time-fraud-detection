@@ -11,3 +11,7 @@ venv/
 
 # MacOS
 .DS_Store
+
+# Large data files
+data/raw/*.csv
+data/processed/*.csv
