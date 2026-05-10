@@ -15,3 +15,7 @@ venv/
 # Large data files
 data/raw/*.csv
 data/processed/*.csv
+
+# MLflow tracking artifacts
+mlruns/
+mlartifacts/
